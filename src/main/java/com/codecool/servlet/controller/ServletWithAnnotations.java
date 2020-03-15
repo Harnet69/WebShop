@@ -1,4 +1,4 @@
-package com.codecool.servlet;
+package com.codecool.servlet.controller;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +26,7 @@ public class ServletWithAnnotations extends HttpServlet {
                 "<li><b>First Name</b>: " + request.getParameter("first_name") + "\n" +
                 "<li><b>Last Name</b>: " + request.getParameter("last_name") + "\n" +
                 "</ul>\n" +
+                "<div>WebShop: <a href=\"/webshop\">WebShop</a></div>"+
                 "<div>Visit another servlet: <a href=\"/another\">Visit the other servlet</a></div>" +
                 "</body></html>"
         );
