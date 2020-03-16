@@ -25,16 +25,20 @@ public class WebShopServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
         PrintWriter out = response.getWriter();
         String title = "WebShop";
         Set<Item> items = Stock.getInstance().getItemsInStock();
 
         // get get parameters from user and add item with such id to cart
+        String linkAction = request.getParameter("action");
         String linkId = request.getParameter("link_id");
         if(linkId != null){
-            cart.addItem(Stock.getInstance().getItemById(Integer.parseInt(linkId)));
-//            System.out.println(cart.getOrderedItems());
+            if(linkAction.equals("add")){
+                cart.addItem(Stock.getInstance().getItemById(Integer.parseInt(linkId)));
+            }
+            else if(linkAction.equals("remove")){
+                cart.removeItem(Stock.getInstance().getItemById(Integer.parseInt(linkId)));
+            }
         }
 
         out.println(
@@ -49,7 +53,7 @@ public class WebShopServlet extends HttpServlet {
                     "<tr>" +
                             "<td>" + item.getName() + "</td>" +
                             "<td>" + item.getPrice()+ " USD" + "</td>" +
-                            "<td>" + "<a href='/webshop?link_id="+ item.getId()+"'" +">Add</a>" + "</td>" +
+                            "<td>" + "<a href='/webshop?link_id="+ item.getId()+"&action=add'" +">Add</a>" + "</td>" +
 //                            "<td>" + "<a href='/webshop?link_id="+ item.getId()+"'" +">Remove</a>" + "</td>" +
                     "</tr>");
         }
@@ -66,7 +70,7 @@ public class WebShopServlet extends HttpServlet {
                     "<tr>" +
                             "<td>" + item.getName() + "</td>" +
                             "<td>" + item.getPrice()+ " USD" + "</td>" +
-                            "<td>" + "<a href='#'>Remove</a>" + "</td>" +
+                            "<td>" + "<a href='/webshop?link_id="+ item.getId()+"&action=remove'" +">Remove</a>" + "</td>" +
                     "</tr>");
         }
         out.println(
@@ -74,6 +78,4 @@ public class WebShopServlet extends HttpServlet {
                         "</body></html>"
         );
     }
-
-
 }
