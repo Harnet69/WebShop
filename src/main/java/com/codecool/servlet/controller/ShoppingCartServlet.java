@@ -1,7 +1,5 @@
 package com.codecool.servlet.controller;
 
-import com.codecool.servlet.model.Cart;
-import com.codecool.servlet.model.Item;
 import com.codecool.servlet.view.ShoppingCartView;
 
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +19,6 @@ public class ShoppingCartServlet extends HttpServlet {
         String title = "Shopping Cart";
         ShoppingCartView view = new ShoppingCartView(out, title);
 
-        view.showTable();
+        view.showCart();
     }
 }

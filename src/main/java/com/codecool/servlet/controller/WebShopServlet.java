@@ -3,6 +3,7 @@ package com.codecool.servlet.controller;
 import com.codecool.servlet.model.Cart;
 import com.codecool.servlet.model.Item;
 import com.codecool.servlet.model.Stock;
+import com.codecool.servlet.view.ShoppingCartView;
 import com.codecool.servlet.view.WebShopView;
 
 import javax.servlet.ServletException;
@@ -30,6 +31,7 @@ public class WebShopServlet extends HttpServlet {
         String title = "WebShop";
         Set<Item> items = Stock.getInstance().getItemsInStock();
         WebShopView view = new WebShopView(out, items, title);
+        ShoppingCartView cartView = new ShoppingCartView(out, title);
 
         // get get parameters from user and add item with such id to cart
         String linkAction = request.getParameter("action");
@@ -42,6 +44,8 @@ public class WebShopServlet extends HttpServlet {
                 cart.removeItem(Stock.getInstance().getItemById(Integer.parseInt(linkId)));
             }
         }
-        view.showTable();
+
+        view.showStockItems();
+        cartView.showCart();
     }
 }

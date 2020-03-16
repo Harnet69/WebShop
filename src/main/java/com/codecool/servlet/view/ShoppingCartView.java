@@ -16,12 +16,12 @@ public class ShoppingCartView {
         this.title = title;
     }
 
-    public void showTable() {
+    public void showCart() {
         out.println(
                 "<html>\n" +
-                        "<head><title>" + title + "</title></head>\n" +
-                        "<body>\n" +
-                        "<a href='/'>Home</a><h1 align = \"center\">" + title + "</h1>"
+//                        "<head><title>" + title + "</title></head>\n" +
+                        "<body>\n"
+//                        "<a href='/'>Home</a><h1 align = \"center\">" + title + "</h1>"
         );
         if (Cart.getInstance().getItemPriceAmount() > 0) {
             out.println(

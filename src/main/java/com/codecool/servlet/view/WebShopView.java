@@ -17,7 +17,7 @@ public class WebShopView {
         this.title = title;
     }
 
-    public void showTable(){
+    public void showStockItems(){
         out.println(
                 "<html>\n" +
                         "<head><title>" + title + "</title></head>\n" +
@@ -31,7 +31,6 @@ public class WebShopView {
                             "<td>" + item.getName() + "</td>" +
                             "<td>" + item.getPrice()+ " USD" + "</td>" +
                             "<td>" + "<a href='/webshop?link_id="+ item.getId()+"&action=add'" +">Add</a>" + "</td>" +
-//                            "<td>" + "<a href='/webshop?link_id="+ item.getId()+"'" +">Remove</a>" + "</td>" +
                             "</tr>");
         }
         out.println(
@@ -39,24 +38,5 @@ public class WebShopView {
                         "<a href=\"/shopping-cart\"><h3 align='center'>Shopping cart</h3></a>" +
                         "</body></html>"
         );
-
-        if(Cart.getInstance().getItemPriceAmount() > 0) {
-        out.println(
-                "<table align='center' border='1'> <tr><th>Name</th><th>Price</th><th>Remove</th></tr>\n"
-        );
-        for (Item item : Cart.getInstance().getOrderedItems()) {
-            out.println(
-                    "<tr>" +
-                            "<td>" + item.getName() + "</td>" +
-                            "<td>" + item.getPrice()+ " USD" + "</td>" +
-                            "<td>" + "<a href='/webshop?link_id="+ item.getId()+"&action=remove'" +">Remove</a>" + "</td>" +
-                            "</tr>");
-        }
-
-            out.println(
-                    "<tr><td><b>Amount</b></td><td><b>" + Cart.getInstance().getItemPriceAmount() + " USD" + "</b></td></tr></table>\n" +
-                            "</body></html>"
-            );
-        }
     }
 }
