@@ -32,15 +32,20 @@ public class WebShopServlet extends HttpServlet {
                 "<html>\n" +
                         "<head><title>" + title + "</title></head>\n" +
                         "<body>\n" +
-                        "<a href='/'>Home</a><h1 align = \"center\">" + title + "</h1>\n" +
-                        "<ul>\n"
+                        "<a href='/'>Home</a><h1 align = \"center\">" + title + "</h1>" +
+                        "<table align='center' border='1'> <tr><th>Name</th><th>Price</th><th>Add</th><th>Remove</th></tr>\n"
         );
         for (Item item : items) {
             out.println(
-                    "<li>" + item.getName() + " : " + item.getPrice() + "</li>");
+                    "<tr>" +
+                            "<td>" + item.getName() + "</td>" +
+                            "<td>" + item.getPrice()+ "</td>" +
+                            "<td>" + "Add" + "</td>" +
+                            "<td>" + "Remove" + "</td>" +
+                    "</tr>");
         }
         out.println(
-                "</ul>\n" +
+                "</table>\n" +
                         "</body></html>"
         );
     }
