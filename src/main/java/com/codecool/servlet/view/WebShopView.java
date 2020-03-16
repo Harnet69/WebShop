@@ -54,7 +54,7 @@ public class WebShopView {
         }
 
             out.println(
-                    "<tr><td>Amount</td><td>" + Cart.getInstance().getItemPriceAmount() + " USD" + "</td></tr></table>\n" +
+                    "<tr><td><b>Amount</b></td><td><b>" + Cart.getInstance().getItemPriceAmount() + " USD" + "</b></td></tr></table>\n" +
                             "</body></html>"
             );
         }

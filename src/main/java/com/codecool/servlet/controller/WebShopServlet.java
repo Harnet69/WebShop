@@ -43,6 +43,5 @@ public class WebShopServlet extends HttpServlet {
             }
         }
         view.showTable();
-
     }
 }
