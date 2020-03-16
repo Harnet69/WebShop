@@ -3,6 +3,7 @@ package com.codecool.servlet.controller;
 import com.codecool.servlet.model.Cart;
 import com.codecool.servlet.model.Item;
 import com.codecool.servlet.model.Stock;
+import com.codecool.servlet.view.WebShopView;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,6 +29,7 @@ public class WebShopServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         String title = "WebShop";
         Set<Item> items = Stock.getInstance().getItemsInStock();
+        WebShopView view = new WebShopView(out, items, title);
 
         // get get parameters from user and add item with such id to cart
         String linkAction = request.getParameter("action");
@@ -40,42 +42,7 @@ public class WebShopServlet extends HttpServlet {
                 cart.removeItem(Stock.getInstance().getItemById(Integer.parseInt(linkId)));
             }
         }
+        view.showTable();
 
-        out.println(
-                "<html>\n" +
-                        "<head><title>" + title + "</title></head>\n" +
-                        "<body>\n" +
-                        "<a href='/'>Home</a><h1 align = \"center\">" + title + "</h1>" +
-                        "<table align='center' border='1'> <tr><th>Name</th><th>Price</th><th>Add</th></tr>\n"
-        );
-        for (Item item : items) {
-            out.println(
-                    "<tr>" +
-                            "<td>" + item.getName() + "</td>" +
-                            "<td>" + item.getPrice()+ " USD" + "</td>" +
-                            "<td>" + "<a href='/webshop?link_id="+ item.getId()+"&action=add'" +">Add</a>" + "</td>" +
-//                            "<td>" + "<a href='/webshop?link_id="+ item.getId()+"'" +">Remove</a>" + "</td>" +
-                    "</tr>");
-        }
-        out.println(
-                "</table>\n" +
-                       "<a href=\"/shopping-cart\"><h3 align='center'>Shopping cart</h3></a>" +
-                        "</body></html>"
-        );
-        out.println(
-                        "<table align='center' border='1'> <tr><th>Name</th><th>Price</th><th>Remove</th></tr>\n"
-        );
-        for (Item item : Cart.getInstance().getOrderedItems()) {
-            out.println(
-                    "<tr>" +
-                            "<td>" + item.getName() + "</td>" +
-                            "<td>" + item.getPrice()+ " USD" + "</td>" +
-                            "<td>" + "<a href='/webshop?link_id="+ item.getId()+"&action=remove'" +">Remove</a>" + "</td>" +
-                    "</tr>");
-        }
-        out.println(
-                "<tr><td>Amount</td><td>"+ Cart.getInstance().getItemPriceAmount() + " USD" + "</td></tr></table>\n" +
-                        "</body></html>"
-        );
     }
 }
