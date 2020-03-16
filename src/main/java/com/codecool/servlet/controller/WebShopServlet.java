@@ -1,5 +1,9 @@
 package com.codecool.servlet.controller;
 
+import org.w3c.dom.ls.LSOutput;
+
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,9 +14,12 @@ import java.io.PrintWriter;
 @WebServlet(name = "webShopServlet", urlPatterns = {"/webshop"}, loadOnStartup = 1)
 public class WebShopServlet extends HttpServlet {
 
+    public void init() throws ServletException {
+        System.out.println("Initialization was done");
+    }
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         PrintWriter out = response.getWriter();
         String title = "WebShop";
