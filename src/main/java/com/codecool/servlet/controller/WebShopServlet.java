@@ -1,5 +1,7 @@
 package com.codecool.servlet.controller;
 
+import com.codecool.servlet.model.Item;
+import com.codecool.servlet.model.Stock;
 import org.w3c.dom.ls.LSOutput;
 
 import javax.servlet.ServletException;
@@ -10,12 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Iterator;
 
 @WebServlet(name = "webShopServlet", urlPatterns = {"/webshop"}, loadOnStartup = 1)
 public class WebShopServlet extends HttpServlet {
 
     public void init() throws ServletException {
         System.out.println("Initialization was done");
+        Stock stock = Stock.getInstance();
+        stock.addDefaultItemsToStock();
+//        System.out.println(stock.getItemsInStock());
+        stock.showItemsInStock();
+        stock.addItemToStock(new Item("Toilet paper", 0.99));
+        System.out.println();
+        stock.showItemsInStock();
     }
 
     @Override
