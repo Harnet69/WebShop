@@ -34,7 +34,7 @@ public class WebShopServlet extends HttpServlet {
         String linkId = request.getParameter("link_id");
         if(linkId != null){
             cart.addItem(Stock.getInstance().getItemById(Integer.parseInt(linkId)));
-            System.out.println(cart.getOrderedItems());
+//            System.out.println(cart.getOrderedItems());
         }
 
         out.println(
@@ -42,7 +42,7 @@ public class WebShopServlet extends HttpServlet {
                         "<head><title>" + title + "</title></head>\n" +
                         "<body>\n" +
                         "<a href='/'>Home</a><h1 align = \"center\">" + title + "</h1>" +
-                        "<table align='center' border='1'> <tr><th>Name</th><th>Price</th><th>Add</th><th>Remove</th></tr>\n"
+                        "<table align='center' border='1'> <tr><th>Name</th><th>Price</th><th>Add</th></tr>\n"
         );
         for (Item item : items) {
             out.println(
@@ -50,7 +50,7 @@ public class WebShopServlet extends HttpServlet {
                             "<td>" + item.getName() + "</td>" +
                             "<td>" + item.getPrice()+ " USD" + "</td>" +
                             "<td>" + "<a href='/webshop?link_id="+ item.getId()+"'" +">Add</a>" + "</td>" +
-                            "<td>" + "<a href='/webshop?link_id="+ item.getId()+"'" +">Remove</a>" + "</td>" +
+//                            "<td>" + "<a href='/webshop?link_id="+ item.getId()+"'" +">Remove</a>" + "</td>" +
                     "</tr>");
         }
         out.println(
@@ -58,5 +58,22 @@ public class WebShopServlet extends HttpServlet {
                        "<a href=\"/shopping-cart\"><h3 align='center'>Shopping cart</h3></a>" +
                         "</body></html>"
         );
+        out.println(
+                        "<table align='center' border='1'> <tr><th>Name</th><th>Price</th><th>Remove</th></tr>\n"
+        );
+        for (Item item : Cart.getInstance().getOrderedItems()) {
+            out.println(
+                    "<tr>" +
+                            "<td>" + item.getName() + "</td>" +
+                            "<td>" + item.getPrice()+ " USD" + "</td>" +
+                            "<td>" + "<a href='#'>Remove</a>" + "</td>" +
+                    "</tr>");
+        }
+        out.println(
+                "<tr><td>Amount</td><td>"+ Cart.getInstance().getItemPriceAmount() + " USD" + "</td></tr></table>\n" +
+                        "</body></html>"
+        );
     }
+
+
 }

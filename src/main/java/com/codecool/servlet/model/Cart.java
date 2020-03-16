@@ -23,6 +23,24 @@ public class Cart {
         return OrderedItems;
     }
 
+    public double getItemPriceAmount(){
+        double amount = 0;
+        for(Item item : OrderedItems){
+            amount+=item.getPrice();
+        }
+        return round(amount, 2);
+    }
+
+    // round amount to two numbers after comma
+    private double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        long factor = (long) Math.pow(10, places);
+        value = value * factor;
+        long tmp = Math.round(value);
+        return (double) tmp / factor;
+    }
+
     public void addItem(Item item){
         OrderedItems.add(item);
     }
