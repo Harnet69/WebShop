@@ -16,7 +16,7 @@ import java.util.Set;
 @WebServlet(name = "webShopServlet", urlPatterns = {"/webshop"}, loadOnStartup = 2)
 public class WebShopServlet extends HttpServlet {
     Stock stock = Stock.getInstance();
-    Cart cart = new Cart();;
+    Cart cart = Cart.getInstance();
 
     public void init() throws ServletException {
         stock.addDefaultItemsToStock();
@@ -30,9 +30,8 @@ public class WebShopServlet extends HttpServlet {
         String title = "WebShop";
         Set<Item> items = Stock.getInstance().getItemsInStock();
 
-        // get get parameters from user
+        // get get parameters from user and add item with such id to cart
         String linkId = request.getParameter("link_id");
-
         if(linkId != null){
             cart.addItem(Stock.getInstance().getItemById(Integer.parseInt(linkId)));
             System.out.println(cart.getOrderedItems());
