@@ -1,5 +1,6 @@
 package com.codecool.servlet.controller;
 
+import com.codecool.servlet.model.Cart;
 import com.codecool.servlet.model.Item;
 import com.codecool.servlet.model.Stock;
 
@@ -12,14 +13,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Set;
 
-@WebServlet(name = "shoppingCartServlet", urlPatterns = {"/shopping-cart"}, loadOnStartup = 1)
+@WebServlet(name = "shoppingCartServlet", urlPatterns = {"/shopping-cart"}, loadOnStartup = 2)
 public class ShoppingCartServlet extends HttpServlet {
-    public void init() throws ServletException {
-    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+        System.out.println("Sgopping cart!");
         PrintWriter out = response.getWriter();
         String title = "Shopping Cart";
 //        Set<Item> items = Stock.getInstance().getItemsInStock();
@@ -31,6 +31,8 @@ public class ShoppingCartServlet extends HttpServlet {
                         "<a href='/'>Home</a><h1 align = \"center\">" + title + "</h1>" +
                         "<table align='center' border='1'> <tr><th>Name</th><th>Price</th><th>Add</th><th>Remove</th></tr>\n"
         );
+//        String linkId = request.getParameter("link_id");
+//        System.out.println("!!!!!!!!!!!!!!!"+linkId);
 //        for (Item item : items) {
 //            out.println(
 //                    "<tr>" +

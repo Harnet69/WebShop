@@ -1,6 +1,8 @@
 package com.codecool.servlet.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Stock {
@@ -29,6 +31,15 @@ public class Stock {
     public void addDefaultItemsToStock(){
         itemsInStock.add(new Item("Asus Laptop", 1600.0));
         itemsInStock.add(new Item("Harry Potter Ebook", 50.0));
+    }
+
+    public Item getItemById(int id){
+        for(Item item : itemsInStock){
+            if(item.getId() == id){
+                return item;
+            }
+        }
+        return null;
     }
 
     public void addItemToStock(Item item){

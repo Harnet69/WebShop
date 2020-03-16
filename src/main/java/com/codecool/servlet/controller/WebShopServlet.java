@@ -1,5 +1,6 @@
 package com.codecool.servlet.controller;
 
+import com.codecool.servlet.model.Cart;
 import com.codecool.servlet.model.Item;
 import com.codecool.servlet.model.Stock;
 
@@ -12,9 +13,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Set;
 
-@WebServlet(name = "webShopServlet", urlPatterns = {"/webshop"}, loadOnStartup = 1)
+@WebServlet(name = "webShopServlet", urlPatterns = {"/webshop"}, loadOnStartup = 2)
 public class WebShopServlet extends HttpServlet {
     Stock stock = Stock.getInstance();
+    Cart cart = new Cart();;
 
     public void init() throws ServletException {
         stock.addDefaultItemsToStock();
@@ -28,6 +30,14 @@ public class WebShopServlet extends HttpServlet {
         String title = "WebShop";
         Set<Item> items = Stock.getInstance().getItemsInStock();
 
+        // get get parameters from user
+        String linkId = request.getParameter("link_id");
+
+        if(linkId != null){
+            cart.addItem(Stock.getInstance().getItemById(Integer.parseInt(linkId)));
+            System.out.println(cart.getOrderedItems());
+        }
+
         out.println(
                 "<html>\n" +
                         "<head><title>" + title + "</title></head>\n" +
@@ -40,8 +50,8 @@ public class WebShopServlet extends HttpServlet {
                     "<tr>" +
                             "<td>" + item.getName() + "</td>" +
                             "<td>" + item.getPrice()+ " USD" + "</td>" +
-                            "<td>" + "<a href='#'>Add</a>" + "</td>" +
-                            "<td>" + "<a href='#'>Remove</a>" + "</td>" +
+                            "<td>" + "<a href='/webshop?link_id="+ item.getId()+"'" +">Add</a>" + "</td>" +
+                            "<td>" + "<a href='/webshop?link_id="+ item.getId()+"'" +">Remove</a>" + "</td>" +
                     "</tr>");
         }
         out.println(

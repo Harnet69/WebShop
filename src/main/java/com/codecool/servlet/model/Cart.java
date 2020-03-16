@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private List<Item> items;
+    private List<Item> OrderedItems;
 
     public Cart() {
-        this.items = new ArrayList<Item>();
+        this.OrderedItems = new ArrayList<>();
+    }
+
+    public List<Item> getOrderedItems() {
+        return OrderedItems;
     }
 
     public void addItem(Item item){
-        items.add(item);
+        OrderedItems.add(item);
     }
 
     public void removeItem(Item item){
-        items.remove(item);
+        OrderedItems.remove(item);
     }
 }
