@@ -36,6 +36,7 @@ public class WebShopServlet extends HttpServlet {
         // get get parameters from user and add item with such id to cart
         String linkAction = request.getParameter("action");
         String linkId = request.getParameter("link_id");
+
         if(linkId != null){
             if(linkAction.equals("add")){
                 cart.addItem(Stock.getInstance().getItemById(Integer.parseInt(linkId)));
@@ -46,6 +47,8 @@ public class WebShopServlet extends HttpServlet {
         }
 
         view.showStockItems();
-        cartView.showCart();
+        if(Cart.getInstance().getItemPriceAmount() > 0){
+            cartView.showCart();
+        }
     }
 }

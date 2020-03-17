@@ -31,7 +31,7 @@ public class Cart {
         return round(amount, 2);
     }
 
-    // round amount to two numbers after comma
+    // round amount with two numbers after comma
     private double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
 

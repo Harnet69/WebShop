@@ -39,6 +39,11 @@ public class ShoppingCartView {
                     "<tr><td><b>Amount</b></td><td><b>" + Cart.getInstance().getItemPriceAmount() + " USD" + "</b></td></tr></table>\n" +
                             "</body></html>"
             );
+        }else{
+            out.println(
+                    "<h1>Your Shopping cart is empty</h1>"+
+                            "<a href='/webshop'>Return</a>"
+            );
         }
         out.println(
                 "</table>\n" +
